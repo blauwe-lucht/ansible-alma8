@@ -1,0 +1,16 @@
+---
+- name: My first play
+  hosts: all
+  # Je kunt zoveel commentaar toevoegan als je wilt,
+  # maar helaas geen multiline comments.
+  tasks:
+    - name: Ping
+      ansible.builtin.ping:
+
+    - name: Copy important file
+      ansible.builtin.copy:
+        src: important.txt
+        dest: /home/vagrant/important.txt
+        owner: vagrant
+        group: vagrant
+        mode: "0644"

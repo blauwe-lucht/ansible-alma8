@@ -2,6 +2,8 @@
 
 This repo is part of a workshop to teach people Ansible.
 
+The Ansible control server is AlmaLinux 8, there are two nodes, a CentOS 7 node and an AlmaLinux 8 node.
+
 ## Prerequisites
 
 - VirtualBox, tested with 7.0.14

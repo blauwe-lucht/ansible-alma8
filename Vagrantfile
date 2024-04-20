@@ -4,6 +4,20 @@ Vagrant.configure("2") do |config|
         acs.vm.box = "generic/alma8"
         acs.vm.hostname = "acs"
         acs.vm.network "private_network", ip: "192.168.15.56"
+
+        # Make sure VirtualBox doesn't make new networks for no reason (fix)
+        config.vm.provider :virtualbox do |vb|
+            vb.customize [
+                "modifyvm",
+                :id,
+                "--nic2",
+                "hostonly",
+                "--cableconnected2",
+                "on",
+                "--hostonlyadapter2",
+                "VirtualBox Host-Only Ethernet Adapter"
+            ]
+        end
         
         # Make sure all sensitive info is only readable by user.
         acs.vm.synced_folder ".", "/vagrant", mount_options: ["dmode=700,fmode=600"]
@@ -37,6 +51,19 @@ Vagrant.configure("2") do |config|
         node1.vm.box = "centos/7"
         node1.vm.hostname = "node1"
         node1.vm.network "private_network", ip: "192.168.15.57"
-    end
 
+        # Make sure VirtualBox doesn't make new networks for no reason (fix)
+        config.vm.provider :virtualbox do |vb|
+            vb.customize [
+                "modifyvm",
+                :id,
+                "--nic2",
+                "hostonly",
+                "--cableconnected2",
+                "on",
+                "--hostonlyadapter2",
+                "VirtualBox Host-Only Ethernet Adapter"
+            ]
+        end
+    end
 end

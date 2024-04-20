@@ -1,9 +1,18 @@
 ---
 - name: My first play
   hosts: all
-  # Je kunt zoveel commentaar toevoegan als je wilt,
-  # maar helaas geen multiline comments.
+  # Disable gathering facts, we're going to do it explicitly.
+  gather_facts: false
   tasks:
+    # Gather facts and store the result in the new variable 'setup_result'.
+    - name: Gather facts
+      ansible.builtin.setup:
+      register: setup_result
+
+    - name: Show facts
+      ansible.builtin.debug:
+        var: setup_result
+
     - name: Ping
       ansible.builtin.ping:
 
@@ -14,3 +23,16 @@
         owner: vagrant
         group: vagrant
         mode: "0644"
+
+    - name: Copy important template
+      ansible.builtin.template:
+        src: important.txt.j2
+        dest: /home/vagrant/important-template.txt
+        owner: vagrant
+        group: vagrant
+        mode: "0644"
+
+    - name: Set http_proxy
+      ansible.builtin.lineinfile:
+        path: /etc/environment
+        line: http_proxy://{{ ansible_default_ipv4.gateway }}:9000

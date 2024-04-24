@@ -35,4 +35,4 @@
     - name: Set http_proxy
       ansible.builtin.lineinfile:
         path: /etc/environment
-        line: http_proxy://{{ ansible_default_ipv4.gateway }}:9000
+        line: http_proxy=http://{{ ansible_default_ipv4.gateway }}:9000

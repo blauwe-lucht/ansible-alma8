@@ -1,5 +1,7 @@
 Vagrant.configure("2") do |config|
 
+    host_userdomain = ENV['USERDOMAIN']
+
     config.vm.define "acs" do |acs|
         acs.vm.box = "generic/alma8"
         acs.vm.hostname = "acs"
@@ -23,26 +25,38 @@ Vagrant.configure("2") do |config|
             shell.inline = <<-SHELL
                 set -euxo pipefail
                 
-                # The proxy stuff is needed because this repo is used in a corporate setting
-                # where Zscaler is used. Leave it out or change it when you're situation
-                # is different.
+                if [ "#{host_userdomain}" = "CORP" ]; then
+                    # The proxy stuff is needed because this repo is used in a corporate setting
+                    # where Zscaler is used (= http proxy on host port 9000).
 
-                # netstat -rn shows something like:
-                # Kernel IP routing table
-                # Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
-                # 0.0.0.0         10.0.2.2        0.0.0.0         UG        0 0          0 eth0
-                # 10.0.2.0        0.0.0.0         255.255.255.0   U         0 0          0 eth0
-                # 192.168.15.0    0.0.0.0         255.255.255.0   U         0 0          0 eth1
-                # We retrieve the Gateway from this output:
-                host_ip=$(netstat -rn | grep '^0.0.0.0' | awk '{print $2}')
-                echo "http_proxy=http://$host_ip:9000" >> /etc/environment
-                echo "https_proxy=http://$host_ip:9000" >> /etc/environment
+                    # netstat -rn shows something like:
+                    # Kernel IP routing table
+                    # Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+                    # 0.0.0.0         10.0.2.2        0.0.0.0         UG        0 0          0 eth0
+                    # 10.0.2.0        0.0.0.0         255.255.255.0   U         0 0          0 eth0
+                    # 192.168.15.0    0.0.0.0         255.255.255.0   U         0 0          0 eth1
+                    # We retrieve the Gateway from this output:
+                    host_ip=$(netstat -rn | grep '^0.0.0.0' | awk '{print $2}')
+                    echo "http_proxy=http://$host_ip:9000" >> /etc/environment
+                    echo "https_proxy=http://$host_ip:9000" >> /etc/environment
 
-                export http_proxy=http://$host_ip:9000
-                export https_proxy=http://$host_ip:9000
+                    export http_proxy=http://$host_ip:9000
+                    export https_proxy=http://$host_ip:9000
+                fi
 
-                yum install -y epel-release
-                yum install -y ansible
+                # By default python 3.6 is installed which results in errors when trying to install ansible-lint.
+                # So we'll explicitly install python 3.11.
+                # Pip prefers to run in a virtual environment, so we create one for the vagrant user
+                # and use that pip to install ansible and ansible-lint.
+                yum install -y epel-release python3.11 python3.11-pip
+                sudo -u vagrant bash -c '
+                    set -euxo pipefail
+
+                    python3.11 -m venv /home/vagrant/venv-ansible
+                    . /home/vagrant/venv-ansible/bin/activate
+                    pip install --upgrade pip
+                    pip install ansible ansible-lint
+                '
             SHELL
         end
     end

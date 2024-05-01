@@ -21,6 +21,7 @@ Run Ansible to configure the nodes:
 
 ``` bash
 vagrant ssh acs
+. venv-ansible/bin/activate
 cd /vagrant/ansible
-ansible-playbook playbook -v
+ansible-playbook playbook.yml -v
 ```

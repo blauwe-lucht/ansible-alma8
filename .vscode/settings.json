@@ -1,0 +1,52 @@
+{
+    "terminal.integrated.profiles.linux": {
+        "acs": {
+            "path": "bash",
+            "args": ["-c", "vagrant ssh acs"],
+            "icon": "terminal-bash",
+            "overrideName": true
+        },
+        "node1": {
+            "path": "bash",
+            "args": ["-c", "vagrant ssh node1"],
+            "icon": "terminal-bash",
+            "overrideName": true
+        },
+        "node2": {
+            "path": "bash",
+            "args": ["-c", "vagrant ssh node2"],
+            "icon": "terminal-bash",
+            "overrideName": true
+        },
+        // Remove unneeded terminals:
+        "Azure Cloud Shell (Bash)": null,
+        "Azure Cloud Shell (PowerShell)": null,
+        "JavaScript Debug Terminal": null,
+        "tmux": null
+    },
+    "terminal.integrated.profiles.windows": {
+        "acs": {
+            "path": "powershell",
+            "args": ["-NoLogo", "-Command", "vagrant ssh acs"],
+            "icon": "terminal-powershell",
+            "overrideName": true
+        },
+        "node1": {
+            "path": "powershell",
+            "args": ["-NoLogo", "-Command", "vagrant ssh node1"],
+            "icon": "terminal-powershell",
+            "overrideName": true
+        },
+        "node2": {
+            "path": "powershell",
+            "args": ["-NoLogo", "-Command", "vagrant ssh node1"],
+            "icon": "terminal-powershell",
+            "overrideName": true
+        },
+        // Remove unneeded terminals:
+        "Azure Cloud Shell (Bash)": null,
+        "Azure Cloud Shell (PowerShell)": null,
+        "JavaScript Debug Terminal": null,
+        "tmux": null
+    },
+}

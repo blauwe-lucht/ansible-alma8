@@ -56,6 +56,9 @@ Vagrant.configure("2") do |config|
                     . /home/vagrant/venv-ansible/bin/activate
                     pip install --upgrade pip
                     pip install ansible ansible-lint
+
+                    # Make sure we always use ansible from the virtualenv.
+                    echo ". ~/venv-ansible/bin/activate" >> ~/.bashrc
                 '
             SHELL
         end

@@ -71,5 +71,10 @@
     "ansible.python.interpreterPath": "/home/vagrant/venv-ansible/bin/python",
 
     // Prevent line ending differences between Windows and Linux:
-    "files.eol": "\n"
+    "files.eol": "\n",
+
+    // Open every .yml file as Ansible file.
+    "files.associations": {
+        "*.yml": "ansible"
+    }
 }

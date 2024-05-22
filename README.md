@@ -21,7 +21,52 @@ Run Ansible to configure the nodes:
 
 ``` bash
 vagrant ssh acs
-. venv-ansible/bin/activate
 cd /vagrant/ansible
 ansible-playbook playbook.yml -v
 ```
+
+## Using vscode to edit Ansible code
+
+To make proper use of the vscode Ansible extension:
+
+### Install the vscode Remote-SSH extension
+
+Click on the extensions icon (or press Ctrl-Alt-X). Search for Remote-SSH. On the [Remote - SSH extension by Microsoft](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) click 'Install'.
+
+### Set SSH configuration
+
+Change or create the file ~/.ssh/config and add
+
+``` text
+Host acs
+  HostName 127.0.0.1
+  Port 21556
+  User vagrant
+  IdentityFile "<path to your git directory>\ansible-alma8\.vagrant\machines\acs\virtualbox\private_key"
+```
+
+You can check if the config is working properly by openen a prompt and typing
+
+``` bash
+ssh acs
+```
+
+If you're logged in, everything works fine.
+
+### Connect to acs VM
+
+In the bottom left, press the green connection button (it looks a bit like '><').
+Select 'Connect to Host...', select 'acs'. When asked for an operating system type, select 'Linux'.
+
+Vscode will now install some software on the VM.
+
+### Install extensions
+
+Click on the extensions icon (or press Ctrl-Alt-X). Search for Ansible. On the [Ansible extension](https://marketplace.visualstudio.com/items?itemName=redhat.ansible by RedHat) click 'Install in SSH: acs'.
+Another handy extension to install is [Ansible Go to Definition](https://marketplace.visualstudio.com/items?itemName=BlauweLucht.ansible-go-to-definition).
+
+### Open the project folder
+
+In the File menu select 'Open Folder...'. Type /vagrant and click OK or press Enter. Trust the directory.
+
+You can now write Ansible code with syntax highlighting, code completion, linting and navigation.

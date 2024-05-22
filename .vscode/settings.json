@@ -1,20 +1,37 @@
 {
     "terminal.integrated.profiles.linux": {
-        "acs": {
+        "acs (vagrant ssh)": {
             "path": "bash",
             "args": ["-c", "vagrant ssh acs"],
             "icon": "terminal-bash",
             "overrideName": true
         },
-        "node1": {
+        "node1 (vagrant ssh)": {
             "path": "bash",
             "args": ["-c", "vagrant ssh node1"],
             "icon": "terminal-bash",
             "overrideName": true
         },
-        "node2": {
+        "node2 (vagrant ssh)": {
             "path": "bash",
             "args": ["-c", "vagrant ssh node2"],
+            "icon": "terminal-bash",
+            "overrideName": true
+        },
+        "acs (bash)": {
+            "path": "bash",
+            "icon": "terminal-bash",
+            "overrideName": true
+        },
+        "node1 (from acs)": {
+            "path": "bash",
+            "args": ["-c", "ssh vagrant@192.168.15.57 -i /vagrant/.vagrant/machines/node1/virtualbox/private_key"],
+            "icon": "terminal-bash",
+            "overrideName": true
+        },
+        "node2 (from acs)": {
+            "path": "bash",
+            "args": ["-c", "ssh vagrant@192.168.15.58 -i /vagrant/.vagrant/machines/node2/virtualbox/private_key"],
             "icon": "terminal-bash",
             "overrideName": true
         },
@@ -31,13 +48,13 @@
             "icon": "terminal-powershell",
             "overrideName": true
         },
-        "node1": {
+        "node1 (vagrant ssh)": {
             "path": "powershell",
             "args": ["-NoLogo", "-Command", "vagrant ssh node1"],
             "icon": "terminal-powershell",
             "overrideName": true
         },
-        "node2": {
+        "node2 (vagrant ssh)": {
             "path": "powershell",
             "args": ["-NoLogo", "-Command", "vagrant ssh node1"],
             "icon": "terminal-powershell",
@@ -49,4 +66,10 @@
         "JavaScript Debug Terminal": null,
         "tmux": null
     },
+
+    // Make sure the Ansible extension is using ansible-lint from the virtual env:
+    "ansible.python.interpreterPath": "/home/vagrant/venv-ansible/bin/python",
+
+    // Prevent line ending differences between Windows and Linux:
+    "files.eol": "\n"
 }

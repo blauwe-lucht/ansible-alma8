@@ -48,7 +48,7 @@ Vagrant.configure("2") do |config|
                 # So we'll explicitly install python 3.11.
                 # Pip prefers to run in a virtual environment, so we create one for the vagrant user
                 # and use that pip to install ansible and ansible-lint.
-                yum install -y epel-release python3.11 python3.11-pip
+                dnf install -y epel-release python3.11 python3.11-pip
                 sudo -u vagrant bash -c '
                     set -euxo pipefail
 

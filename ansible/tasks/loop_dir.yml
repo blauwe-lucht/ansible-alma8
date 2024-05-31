@@ -1,0 +1,21 @@
+---
+- name: Create directory {{ item.path }}
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    owner: root
+    group: root
+    mode: "{{ item.mode | default('0755') }}"
+    state: directory
+  tags: dirs
+
+- name: Fill directory {{ item.path }} with readme # noqa name[template]
+  ansible.builtin.copy:
+    dest: "{{ item.path }}/readme"
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      {{ item.path }}
+      Dit is een voorbeeld
+      met meerdere regels
+  tags: dirs

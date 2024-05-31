@@ -1,2 +1,9 @@
 ---
 use_corp_http_proxy: false
+product: my_product
+product_dirs:
+  - path: "/{{ product }}"
+  - path: "/{{ product }}/bin"
+  - path: "/{{ product }}/etc"
+  - path: "/{{ product }}/log"
+    mode: "0700"

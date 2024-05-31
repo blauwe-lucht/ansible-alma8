@@ -36,3 +36,4 @@
       ansible.builtin.lineinfile:
         path: /etc/environment
         line: http_proxy=http://{{ ansible_default_ipv4.gateway }}:9000
+      when: use_corp_http_proxy

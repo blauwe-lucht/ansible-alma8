@@ -69,6 +69,8 @@
 
     // Make sure the Ansible extension is using ansible-lint from the virtual env:
     "ansible.python.interpreterPath": "/home/vagrant/venv-ansible/bin/python",
+    "ansible.ansible.path": "/home/vagrant/venv-ansible/bin/ansible",
+    "ansible.validation.lint.path": "/home/vagrant/venv-ansible/bin/ansible-lint",
 
     // Prevent line ending differences between Windows and Linux:
     "files.eol": "\n",

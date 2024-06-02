@@ -62,7 +62,7 @@ Vscode will now install some software on the VM.
 
 ### Install extensions
 
-Click on the extensions icon (or press Ctrl-Alt-X). Search for Ansible. On the [Ansible extension](https://marketplace.visualstudio.com/items?itemName=redhat.ansible by RedHat) click 'Install in SSH: acs'.
+Click on the extensions icon (or press Ctrl-Alt-X). Search for Ansible. On the [Ansible extension by RedHat](https://marketplace.visualstudio.com/items?itemName=redhat.ansible) click 'Install in SSH: acs'.
 Another handy extension to install is [Ansible Go to Definition](https://marketplace.visualstudio.com/items?itemName=BlauweLucht.ansible-go-to-definition).
 
 ### Open the project folder

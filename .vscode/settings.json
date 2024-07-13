@@ -25,13 +25,13 @@
         },
         "node1 (from acs)": {
             "path": "bash",
-            "args": ["-c", "ssh vagrant@192.168.15.57 -i /vagrant/.vagrant/machines/node1/virtualbox/private_key"],
+            "args": ["-c", "ssh vagrant@192.168.15.57 -i /vagrant/.vagrant/machines/node1/virtualbox/private_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"],
             "icon": "terminal-bash",
             "overrideName": true
         },
         "node2 (from acs)": {
             "path": "bash",
-            "args": ["-c", "ssh vagrant@192.168.15.58 -i /vagrant/.vagrant/machines/node2/virtualbox/private_key"],
+            "args": ["-c", "ssh vagrant@192.168.15.58 -i /vagrant/.vagrant/machines/node2/virtualbox/private_key -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"],
             "icon": "terminal-bash",
             "overrideName": true
         },

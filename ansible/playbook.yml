@@ -75,6 +75,44 @@
         enabled: true
       tags: httpd
 
+    - name: Check that we can connect to port 80
+      ansible.builtin.wait_for:
+        host: "{{ ansible_host }}"
+        port: 80
+        timeout: 2
+      tags: httpd
+
+    - name: Create /var/www/html/
+      ansible.builtin.file:
+        path: /var/www/html/
+        owner: root
+        group: root
+        mode: "0775"
+        state: directory
+
+    - name: Create /var/www/html/index.html
+      ansible.builtin.copy:
+        dest: /var/www/html/index.html
+        content: |
+          <html>
+            <h1>Welcome!</h1>
+            <p>To {{ ansible_distribution ~ ' ' ~ ansible_distribution_version }}</p>
+          </html>
+        owner: root
+        group: root
+        mode: "0775"
+      tags: httpd
+
+    - name: Test that we can access the page
+      ansible.builtin.uri:
+        url: http://{{ ansible_host }}
+        return_content: true
+        status_code:
+          - 200
+      register: uri_result
+      failed_when: "'Welcome!' not in uri_result.content"
+      tags: httpd
+
   handlers:
     - name: Reload firewalld
       ansible.builtin.service:

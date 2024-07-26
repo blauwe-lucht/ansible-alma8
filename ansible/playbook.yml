@@ -85,8 +85,8 @@
     - name: Create /var/www/html/
       ansible.builtin.file:
         path: /var/www/html/
-        owner: root
-        group: root
+        owner: apache
+        group: apache
         mode: "0775"
         state: directory
 
@@ -98,8 +98,8 @@
             <h1>Welcome!</h1>
             <p>To {{ ansible_distribution ~ ' ' ~ ansible_distribution_version }}</p>
           </html>
-        owner: root
-        group: root
+        owner: apache
+        group: apache
         mode: "0775"
       tags: httpd
 
